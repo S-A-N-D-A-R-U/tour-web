@@ -8,6 +8,7 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import SearchResultList from "../pages/SearchResultList";
 import TravelGuide from "../pages/TravelGuide";
+import Transfer from "../pages/Transfer";
 
 const Routers = () => {
   return (
@@ -20,6 +21,7 @@ const Routers = () => {
       <Route path="/register" element={<Register />} />
       <Route path="/tours/search" element={<SearchResultList />} />
       <Route path="/tavel-guide" element={<TravelGuide />} />
+      <Route path="/transfer" element={<Transfer/>} />
     </Routes>
   );
 };
