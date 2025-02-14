@@ -4,11 +4,9 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "../pages/Home";
 import Tours from "../pages/Tours";
 import TourDetails from "../pages/TourDetails";
-import Login from "../pages/Login";
-import Register from "../pages/Register";
-import SearchResultList from "../pages/SearchResultList";
 import TravelGuide from "../pages/TravelGuide";
 import Transfer from "../pages/Transfer";
+import Contact from "../pages/Contact";
 
 const Routers = () => {
   return (
@@ -17,11 +15,9 @@ const Routers = () => {
       <Route path="/home" element={<Home />} />
       <Route path="/tours" element={<Tours />} />
       <Route path="/tour/:id" element={<TourDetails />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="/tours/search" element={<SearchResultList />} />
       <Route path="/tavel-guide" element={<TravelGuide />} />
       <Route path="/transfer" element={<Transfer/>} />
+      <Route path="/contact-us" element={<Contact/>} />
     </Routes>
   );
 };

@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Globe, ChevronDown, Phone, Mail, Menu, X } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [menuOpened, setMenuOpened] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,18 +27,24 @@ const Navbar = () => {
 
   const toggleMenu = () => setMenuOpened(!menuOpened);
 
+  const handleTourClick = (type) => {
+    navigate(`/tours?type=${type}`);
+    setIsDropdownOpen(false);
+    if (menuOpened) setMenuOpened(false);
+  };
+
   return (
     <nav className={`bg-white w-full fixed top-0 z-50 transition-all duration-300 ${scrolled ? 'shadow-lg' : ''}`}>
       <div className="max-w-7xl mx-auto flex">
         {/* Logo Section */}
         <div className="w-[200px] border-r border-gray-100">
-          <a href="/" className="block p-2">
+          <Link to="/" className="block p-2">
             <img 
               src="/logo.png" 
               alt="logo" 
               className="h-20 w-auto object-contain"
             />
-          </a>
+          </Link>
         </div>
 
         {/* Right Section */}
@@ -65,7 +73,7 @@ const Navbar = () => {
           <div className="px-4 flex items-center justify-between h-12">
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center space-x-8">
-              <a href="/" className="text-gray-700 hover:text-blue-600">Home</a>
+              <Link to="/" className="text-gray-700 hover:text-blue-600">Home</Link>
               <div className="relative">
                 <button 
                   className="flex items-center text-gray-700 hover:text-blue-600"
@@ -81,34 +89,34 @@ const Navbar = () => {
                     onMouseEnter={() => setIsDropdownOpen(true)}
                     onMouseLeave={() => setIsDropdownOpen(false)}
                   >
-                    <a 
-                      href="/round-tour" 
-                      className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600"
+                    <button 
+                      onClick={() => handleTourClick('round')} 
+                      className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600"
                     >
                       Round Tour
-                    </a>
-                    <a 
-                      href="/day-tour" 
-                      className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600"
+                    </button>
+                    <button 
+                      onClick={() => handleTourClick('day')} 
+                      className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600"
                     >
                       Day Tour
-                    </a>
+                    </button>
                   </div>
                 )}
               </div>
-              <a href="#" className="text-gray-700 hover:text-blue-600">Seat in Coach</a>
-              <a href="#" className="text-gray-700 hover:text-blue-600">Things to Do</a>
-              <a href="#" className="text-gray-700 hover:text-blue-600">Offers</a>
-              <a href="/transfer" className="text-gray-700 hover:text-blue-600">Transfer</a>
-              <a href="/tavel-guide" className="text-gray-700 hover:text-blue-600">Travel Guide</a>
+              <Link to="#" className="text-gray-700 hover:text-blue-600">Seat in Coach</Link>
+              <Link to="#" className="text-gray-700 hover:text-blue-600">Things to Do</Link>
+              <Link to="#" className="text-gray-700 hover:text-blue-600">Offers</Link>
+              <Link to="/transfer" className="text-gray-700 hover:text-blue-600">Transfer</Link>
+              <Link to="#" className="text-gray-700 hover:text-blue-600">Travel Guide</Link>
             </div>
 
-            <a 
-              href="/contact-us" 
+            <Link 
+              to="/contact-us" 
               className="hidden lg:block bg-[#003366] px-5 py-1.5 text-white rounded-md hover:bg-[#004080] transition-colors"
             >
               Contact Us
-            </a>
+            </Link>
 
             {/* Mobile Menu Button */}
             <button 
@@ -124,7 +132,7 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       <div 
-        className={`lg:hidden fixed inset-0  bg-opacity-50 transition-opacity duration-300 ${
+        className={`lg:hidden fixed inset-0 bg-black bg-opacity-50 transition-opacity duration-300 ${
           menuOpened ? 'opacity-100 visible' : 'opacity-0 invisible'
         }`}
         onClick={toggleMenu}
@@ -146,7 +154,7 @@ const Navbar = () => {
 
           <div className="p-4 pt-16 overflow-y-auto h-full">
             <div className="flex flex-col space-y-4">
-              <a href="/" className="p-2 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md">Home</a>
+              <Link to="/" className="p-2 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md">Home</Link>
               <div className="relative">
                 <button 
                   onClick={() => setIsDropdownOpen(!isDropdownOpen)}
@@ -157,32 +165,32 @@ const Navbar = () => {
                 </button>
                 {isDropdownOpen && (
                   <div className="pl-4 mt-2 space-y-2">
-                    <a 
-                      href="/round-tour" 
-                      className="block p-2 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md"
+                    <button 
+                      onClick={() => handleTourClick('round')} 
+                      className="block w-full p-2 text-left text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md"
                     >
                       Round Tour
-                    </a>
-                    <a 
-                      href="/day-tour" 
-                      className="block p-2 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md"
+                    </button>
+                    <button 
+                      onClick={() => handleTourClick('day')} 
+                      className="block w-full p-2 text-left text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md"
                     >
                       Day Tour
-                    </a>
+                    </button>
                   </div>
                 )}
               </div>
-              <a href="#" className="p-2 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md">Seat in Coach</a>
-              <a href="#" className="p-2 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md">Things to Do</a>
-              <a href="#" className="p-2 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md">Offers</a>
-              <a href="/transfer" className="p-2 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md">Transfer</a>
-              <a href="/tavel-guide" className="p-2 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md">Travel Guide</a>
-              <a 
-                href="/contact-us" 
+              <Link to="#" className="p-2 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md">Seat in Coach</Link>
+              <Link to="#" className="p-2 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md">Things to Do</Link>
+              <Link to="#" className="p-2 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md">Offers</Link>
+              <Link to="/transfer" className="p-2 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md">Transfer</Link>
+              <Link to="#" className="p-2 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md">Travel Guide</Link>
+              <Link 
+                to="/contact-us" 
                 className="bg-[#003366] px-5 py-2 text-white rounded-md hover:bg-[#004080] text-center"
               >
                 Contact Us
-              </a>
+              </Link>
             </div>
           </div>
         </div>
