@@ -6,7 +6,7 @@ const GHero = () => {
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/transfer1.jpeg"
+          src="/img7.jpeg"
           alt="Transfer Background"
           className="absolute inset-0 w-full h-full object-cover"
         />

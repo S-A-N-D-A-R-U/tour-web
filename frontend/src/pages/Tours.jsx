@@ -11,6 +11,7 @@ import {
   Tag,
   Award,
 } from "lucide-react";
+import TourPackageItemCard from "../components/TourPackageItemCard";
 
 const tours = [
   {
@@ -53,7 +54,7 @@ const tours = [
     title: "Sigiriya Day Tour",
     description:
       "Climb the ancient rock fortress and explore the surrounding gardens.",
-    image: "https://images.unsplash.com/photo-1586185118245-89b519c7c364",
+    image: "/img2.jpg",
     duration: "Full Day",
     maxPeople: 15,
     price: 85,
@@ -69,7 +70,7 @@ const tours = [
     title: "Yala Safari Adventure",
     description:
       "Spot leopards, elephants, and other wildlife in their natural habitat.",
-    image: "https://images.unsplash.com/photo-1590418606746-018840f9cd0f",
+    image: "/img1.jpg",
     duration: "Full Day",
     maxPeople: 6,
     price: 120,
@@ -200,7 +201,7 @@ const Tours = () => {
   return (
     <div className="min-h-screen pb-8">
       {/* Tabs and Filters */}
-      <div className="sticky top-20 pt-2 bg-white shadow-md z-30">
+      <div className=" mt-20 pt-2 bg-white z-30">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex flex-col md:flex-row md:items-center justify-between space-y-4 md:space-y-0">
             {/* Tour Type Tabs */}
@@ -234,7 +235,7 @@ const Tours = () => {
             </div>
 
             {/* Search Bar */}
-            <div className="py-4 border-t border-gray-100">
+            <div className="py-2 border-t border-gray-100">
               <div className="relative">
                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <input
@@ -291,8 +292,8 @@ const Tours = () => {
       </div>
 
       {/* Tours Grid */}
-      <div className="max-w-7xl mx-auto px-4 py-8">
-        <div className=" mx-auto pt-16 pb-4">
+      <div className="max-w-7xl mx-auto px-4 py-4">
+        <div className=" mx-autopb-4 pb-8">
           <h1 className="text-3xl md:text-4xl font-bold mb-4 font-display">
             {activeTab === "round" ? "Round Tours" : "Day Tours"} in Sri Lanka
           </h1>
@@ -304,7 +305,7 @@ const Tours = () => {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {currentTours.map((tour) => (
-            <TourCard key={tour.id} tour={tour} />
+            <TourPackageItemCard key={tour.id} {...tour} />
           ))}
         </div>
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 
 export const TourPackagesdetails = [
@@ -175,7 +175,18 @@ export const TourPackagesdetails = [
 ];
 
 const TourDetail = () => {
+  const { id } = useParams();
   const tour = TourPackagesdetails[0];
+
+  const tourb = {
+    title: "7-Day Cultural Heritage Tour",
+    price: 899,
+    duration: "7 Days",
+    image: "https://images.unsplash.com/photo-1586185118245-89b519c7c364",
+    rating: 4.9,
+    reviews: 128,
+    location: "Cultural Triangle"
+  }
   const navigate = useNavigate();
 
   const renderMarkdown = (text) => {
@@ -183,7 +194,7 @@ const TourDetail = () => {
   };
 
   const handleBookNow = () => {
-    navigate('/plan-tour', { state: { selectedTour: tour } });
+    navigate(`/tour-packages/${id}/book`, { state: { tour: tourb } });
   };
 
   return (
@@ -342,7 +353,7 @@ const TourDetail = () => {
                 </div>
                 <button
                 onClick={handleBookNow}
-                 className="w-full bg-blue-600 text-white py-4 px-6 rounded-xl text-lg font-semibold hover:bg-blue-700 transition-colors mb-6">
+                 className="w-full bg-blue-600 cursor-pointer text-white py-4 px-6 rounded-xl text-lg font-semibold hover:bg-blue-700 transition-colors mb-6">
                   Book Now
                 </button>
                 <button className="w-full border-2 border-blue-600 text-blue-600 py-4 px-6 rounded-xl text-lg font-semibold hover:bg-blue-50 transition-colors">

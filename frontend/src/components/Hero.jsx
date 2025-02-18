@@ -1,42 +1,40 @@
 import React, { useState, useEffect } from "react";
 import { ChevronDown, ChevronRight, ChevronLeft } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const sliderImages = [
   {
-    url: "./hero1.jpg",
-    title: "Pristine Beaches",
-    description: "Experience the crystal-clear waters and white sandy beaches",
-    tagline: "Paradise Found"
+    url: "/img23.jpg",
+    title: "Golden Beaches",
+    description: "Relax on the sun-kissed shores of Sri Lanka's stunning coastline.",
+    tagline: "Where the Ocean Meets Serenity"
   },
   {
-    url: "https://images.unsplash.com/photo-1588258524675-c61945a0555b?ixlib=rb-4.0.3",
-    title: "Ancient Temples",
-    description: "Discover centuries of history and cultural heritage",
-    tagline: "Sacred Heritage"
+    url: "/img2.jpg",
+    title: "Cultural Wonders",
+    description: "Step into a world of ancient kingdoms and sacred temples.",
+    tagline: "Echoes of the Past"
   },
   {
-    url: "https://images.unsplash.com/photo-1531794382144-875e5bcd761f?ixlib=rb-4.0.3",
-    title: "Wildlife Safari",
-    description: "Encounter exotic wildlife in their natural habitat",
-    tagline: "Wild Encounters"
+    url: "/img25.jpg",
+    title: "Untamed Wildlife",
+    description: "Witness majestic elephants and elusive leopards in the wild.",
+    tagline: "Nature in its Purest Form"
   },
   {
-    url: "https://images.unsplash.com/photo-1546708973-b339540b5162?ixlib=rb-4.0.3",
-    title: "Tea Plantations",
-    description: "Visit the lush green tea estates in the highlands",
-    tagline: "Highland Magic"
+    url: "/img20.jpg",
+    title: "Lush Tea Estates",
+    description: "Breathe in the fresh mountain air as you stroll through tea plantations.",
+    tagline: "Sip the Essence of Sri Lanka"
   },
-  {
-    url: "https://images.unsplash.com/photo-1606471191009-63994c53433b?ixlib=rb-4.0.3",
-    title: "Local Cuisine",
-    description: "Savor the authentic flavors of Sri Lankan cuisine",
-    tagline: "Taste Adventure"
-  }
+  
 ];
+
 
 const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const navigate = useNavigate();
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev === sliderImages.length - 1 ? 0 : prev + 1));
@@ -87,8 +85,10 @@ const Hero = () => {
           <p className="animate-fade-in text-lg text-gray-200 sm:text-xl md:text-2xl">
             {sliderImages[currentSlide].description}
           </p>
-          <button className="group relative mt-8 inline-flex items-center gap-2 bg-blue-600 px-6 py-3 font-semibold text-white transition-all duration-300 hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-600/30">
-            Start Your Journey
+          <button 
+          onClick={() => navigate('/plan-tour')}
+          className="group relative mt-8 inline-flex items-center gap-2 bg-blue-600 px-6 py-3 font-semibold text-white transition-all duration-300 hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-600/30">
+            Plan Your Tour
             <ChevronRight className="transition-transform group-hover:translate-x-1" />
           </button>
         </div>

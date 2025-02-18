@@ -38,7 +38,7 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto flex">
         {/* Logo Section */}
         <div className="w-[200px] border-r border-gray-100">
-          <Link to="/" className="block p-2">
+          <Link to="/" className="block p-1">
             <img 
               src="/logo.png" 
               alt="logo" 
@@ -105,10 +105,10 @@ const Navbar = () => {
                 )}
               </div>
               <Link to="#" className="text-gray-700 hover:text-blue-600">Seat in Coach</Link>
-              <Link to="#" className="text-gray-700 hover:text-blue-600">Things to Do</Link>
+              <Link to="/thingstodo" className="text-gray-700 hover:text-blue-600">Things to Do</Link>
               <Link to="#" className="text-gray-700 hover:text-blue-600">Offers</Link>
               <Link to="/transfer" className="text-gray-700 hover:text-blue-600">Transfer</Link>
-              <Link to="#" className="text-gray-700 hover:text-blue-600">Travel Guide</Link>
+              <Link to="/tavel-guide" className="text-gray-700 hover:text-blue-600">Travel Guide</Link>
             </div>
 
             <Link 
@@ -181,10 +181,10 @@ const Navbar = () => {
                 )}
               </div>
               <Link to="#" className="p-2 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md">Seat in Coach</Link>
-              <Link to="#" className="p-2 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md">Things to Do</Link>
+              <Link to="/thingstodo" className="p-2 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md">Things to Do</Link>
               <Link to="#" className="p-2 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md">Offers</Link>
               <Link to="/transfer" className="p-2 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md">Transfer</Link>
-              <Link to="#" className="p-2 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md">Travel Guide</Link>
+              <Link to="/tavel-guide" className="p-2 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md">Travel Guide</Link>
               <Link 
                 to="/contact-us" 
                 className="bg-[#003366] px-5 py-2 text-white rounded-md hover:bg-[#004080] text-center"

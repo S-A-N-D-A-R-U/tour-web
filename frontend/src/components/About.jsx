@@ -68,7 +68,7 @@ const About = () => {
             <div className="lg:w-1/2 relative">
               <div className="relative h-[400px] w-full">
                 <img
-                  src="https://images.unsplash.com/photo-1588258524675-c61945a0555b"
+                  src="/img17.jpg"
                   alt="Sri Lanka Temple"
                   className="absolute inset-0 w-full h-full object-cover rounded-lg shadow-2xl"
                 />
@@ -82,48 +82,6 @@ const About = () => {
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Image Showcase Section */}
-        <div className="mb-20">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="relative h-[300px] transform hover:scale-105 transition-transform duration-300">
-              <img
-                src="https://images.unsplash.com/photo-1546708973-b339540b5162"
-                alt="Tea Plantations"
-                className="absolute inset-0 w-full h-full object-cover rounded-lg"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-lg"></div>
-              <div className="absolute bottom-4 left-4 text-white">
-                <h3 className="text-xl font-semibold">Tea Plantations</h3>
-                <p className="text-sm">Nuwara Eliya</p>
-              </div>
-            </div>
-            <div className="relative h-[300px] transform hover:scale-105 transition-transform duration-300">
-              <img
-                src="https://images.unsplash.com/photo-1589308078059-be1415eab4c3"
-                alt="Beaches"
-                className="absolute inset-0 w-full h-full object-cover rounded-lg"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-lg"></div>
-              <div className="absolute bottom-4 left-4 text-white">
-                <h3 className="text-xl font-semibold">Pristine Beaches</h3>
-                <p className="text-sm">Southern Coast</p>
-              </div>
-            </div>
-            <div className="relative h-[300px] transform hover:scale-105 transition-transform duration-300">
-              <img
-                src="https://images.unsplash.com/photo-1531794382144-875e5bcd761f"
-                alt="Wildlife"
-                className="absolute inset-0 w-full h-full object-cover rounded-lg"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-lg"></div>
-              <div className="absolute bottom-4 left-4 text-white">
-                <h3 className="text-xl font-semibold">Wildlife Safari</h3>
-                <p className="text-sm">Yala National Park</p>
               </div>
             </div>
           </div>
@@ -200,7 +158,7 @@ const About = () => {
             <div className="lg:w-1/2 relative">
               <div className="relative h-[500px] w-full">
                 <img
-                  src="https://images.unsplash.com/photo-1606471191009-63994c53433b"
+                  src="/img16.jpg"
                   alt="Local Experience"
                   className="absolute inset-0 w-full h-full object-cover rounded-lg shadow-2xl"
                 />

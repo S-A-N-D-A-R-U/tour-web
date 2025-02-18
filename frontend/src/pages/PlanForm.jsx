@@ -1,265 +1,414 @@
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import axios from "axios";
+import React, { useState } from 'react';
+import { ChevronLeft, ChevronRight, Calendar, Users, Hotel, DollarSign, Car, HelpCircle } from 'lucide-react';
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
 
-
-
- const selectedTour = [
-    {
-      id: "1",
-      info: {
-        title: "Sri Lanka & Maldives Tour Itinerary",
-        Destinations:"Sri Lanka (Habarana, Kandy, Nuwara Eliya, Ella, Yala, Weligama, Negombo) & Maldives",
-        des: "Embark on an unforgettable journey through the breathtaking landscapes, rich heritage, and serene beaches of Sri Lanka and the Maldives. Begin your adventure in Sri Lanka, where ancient cultural wonders, lush jungles, scenic hill country, and thrilling wildlife safaris await. Conclude your journey with the ultimate tropical escape in the Maldives, enjoying pristine white-sand beaches, turquoise waters, and luxurious relaxation.",
-        day: "13 Days / 12 Nights",
-        price: "$ 250.00",
-      },
-      Highlights: [
-        "Marvel at UNESCO World Heritage sites such as Dambulla Cave Temple, Sigiriya Rock Fortress, and Galle Fort",
-        "Immerse yourself in local culture with village tours, cooking demonstrations, and traditional dance shows.",
-        "Experience thrilling wildlife safaris in Minneriya, Kaudulla, and Yala National Parks.",
-        "Enjoy scenic hikes to Little Adam’s Peak and Pidurangala Rock with stunning panoramic views.",
-        "Explore iconic landmarks like the Nine Arches Bridge and Rawana Waterfall in Ella.",
-        "Relax on powdery white beaches and bask in crystal-clear waters.",
-        "Indulge in optional activities such as snorkeling, diving, and sunset cruises.",
-        "Discover the tranquility of island life and unwind at a luxurious beach resort.",
-      ],
-      Includes: {
-        include: [
-          "Hotel pickup from the Yala area, including Kirinda, Palatupana, Tissamaharama, Weerawila, and Kataragama",
-          "Transportation in a Safari Jeep (maximum of 6 passengers per jeep)",
-          "Full-day or half-day tour (depending on option selected)",
-          "Picnic lunch (if option selected)",
-        ],
-        notInclude: [
-          "Park entrance fee (40 USD Per person)",
-          "Snacks and drinks",
-        ],
-      },
-      itinerary: [
-        {
-          day: 1,
-          route:"Airport – Habarana",
-          title: "Overnight stay in Golden Star Beach Hotel, Negombo",
-          image: "/popular6.jpg",
-          activities:[
-            "Pick up from Bandaranaike International Airport (Colombo) and transfer to Habarana.",
-            "En route, visit the **Dambulla Cave Temple**, a UNESCO World Heritage site renowned for its stunning Buddha statues and ancient frescoes.",
-            "Evening climb **Pidurangala Rock** for breathtaking panoramic views of the Sigiriya Rock Fortress and surrounding landscapes.",
-            "**Optional**: Enjoy an elephant ride through the lush Habarana jungles.",
-          ],
-          overnightStay: "Habarana",
-        },
-        {
-          day: 2,
-          route:"Habarana – Kandy",
-          title: "Overnight stay in Golden Star Beach Hotel, Negombo",
-          image: "/popular6.jpg",
-          activities:[
-            "Morning climb Sigiriya Rock Fortress, a UNESCO World Heritage site, to explore ancient frescoes, the mirror wall, and summit ruins.",
-            "Experience a traditional village tour featuring an authentic Sri Lankan cooking demonstration and tasting.",
-            "**Optional**: Participate in lake fishing with locals using traditional methods.",
-            "Embark on an elephant jeep safari in Minneriya or Kaudulla National Park to observe wildlife in their natural habitat.",
-            "Visit the Matale Herbal Village to learn about Ayurveda and Sri Lankas herbal heritage.",
-            "Continue to Kandy for a city tour, including the Temple of the Tooth Relic and a stroll around Kandy Lake.",
-            "End the day with a vibrant cultural dance show.",
-          ],
-          overnightStay: "Kandy",
-        },
-        {
-          day: 3,
-          route:"Kandy – Kitulgala – Nuwara Eliya",
-          title: "Overnight stay in Golden Star Beach Hotel, Negombo",
-          image: "/popular6.jpg",
-          activities:[
-            "Morning visit to the Royal Botanical Gardens in Peradeniya.",
-            "Head to Kitulgala for an adrenaline-pumping white-water rafting adventure.",
-            "En route to Nuwara Eliya, stop at a tea plantation and factory to learn about tea production and sample fresh Ceylon tea.",
-            ,
-          ],
-          overnightStay: "Nuwara Eliya",
-        },
-        {
-          day: 4,
-          route:"Nuwara Eliya – Ella",
-          title: "Overnight stay in Golden Star Beach Hotel, Negombo",
-          image: "/popular6.jpg",
-          activities:[
-            "Morning transfer to Ella.",
-            "Visit the iconic Nine Arches Bridge for stunning photo opportunities.",
-            "Hike to Little Adam’s Peak for a scenic trek with panoramic views.",
-            "Explore the picturesque Rawana Waterfall.",
-            "Evening stroll through Ella town, enjoying its charming atmosphere.",
-          ],
-          overnightStay: "Ella",
-        },
-        {
-          day: 5,
-          route:"Ella – Yala",
-          title: "Overnight stay in Golden Star Beach Hotel, Negombo",
-          image: "/popular6.jpg",
-          activities:[
-            "Optional: Morning revisit to Little Adam’s Peak for sunrise.",
-            "Depart for Yala, passing through scenic countryside.",
-          ],
-          overnightStay: "Yala",
-        },
-        {
-          day: 6,
-          route:"Yala",
-          title: "Overnight stay in Golden Star Beach Hotel, Negombo",
-          image: "/popular6.jpg",
-          activities:[
-            "Early morning jeep safari in Yala National Park, famous for its leopard sightings and diverse wildlife.",
-            "Evening visit to Kirinda Beach to enjoy serene coastal views.",
-          ],
-          overnightStay: "Yala",
-        },
-        {
-          day: 7,
-          route:"Yala – Weligama",
-          title: "Overnight stay in Golden Star Beach Hotel, Negombo",
-          image: "/popular6.jpg",
-          activities:[
-            "After breakfast, transfer to Weligama.",
-            "Engage in snorkeling or water activities.",
-            "Optional: Enjoy fishing activities guided by locals.",
-          ],
-          overnightStay: "Weligama",
-        },
-        {
-          day: 8,
-          route:"Weligama – Negombo",
-          title: "Overnight stay in Golden Star Beach Hotel, Negombo",
-          image: "/popular6.jpg",
-          activities:[
-            "Early morning departure for whale watching in Mirissa.",
-            "Visit Galle Fort, a UNESCO World Heritage site, for a guided tour.",
-            "Evening transfer to Negombo.",
-          ],
-          overnightStay: "Negombo",
-        },
-        {
-          day: 9,
-          route:"Negombo – Maldives",
-          title: "Overnight stay in Golden Star Beach Hotel, Negombo",
-          image: "/popular6.jpg",
-          activities:[
-            "Morning flight to the Maldives.",
-            "Upon arrival, transfer to your resort and relax on the beach.",
-          ],
-          overnightStay: "Maldives",
-        },
-        {
-          day: 10,
-          route:"Maldives",
-          title: "Overnight stay in Golden Star Beach Hotel, Negombo",
-          image: "/popular6.jpg",
-          activities:[
-            "Relax and unwind on pristine Maldivian beaches.",
-            "Optional: Snorkeling, diving, sunset cruises, and island hopping.",
-          ],
-          overnightStay: "Maldives",
-        },
-        {
-          day: 11,
-          route:"End of Tour",
-          title: "Overnight stay in Golden Star Beach Hotel, Negombo",
-          image: "/popular6.jpg",
-          activities:[
-            "Depart from the Maldives with unforgettable memories of your Sri Lanka and Maldives adventure.",
-          ],
-          overnightStay: "Maldives",
-        },
-      ],
-    }
-];
-
-const PlanForm = ({  }) => {
-  const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState(null);
-  const [step, setStep] = useState(1);
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {
-      tourId: selectedTour.id,
-      tourName: selectedTour.id,
-    },
+const PlanTour = () => {
+  const [currentStep, setCurrentStep] = useState(1);
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    countryCode: '+94',
+    arrivalDate: '',
+    departureDate: '',
+    adults: '2',
+    children: '',
+    interests: [],
+    accommodation: [],
+    budget: '',
+    additionalServices: [],
+    specificRequests: '',
+    dietaryRestrictions: ''
   });
 
-  const onSubmit = async (data) => {
-    setLoading(true);
-    setMessage(null);
-    try {
-      const response = await axios.post("/api/plan-tour", data);
-      if (response.status === 200) {
-        setMessage("Your booking request has been submitted successfully! We'll contact you shortly.");
-      } else {
-        setMessage("Failed to submit the booking request. Please try again.");
-      }
-    } catch (error) {
-      console.error("Error submitting the form:", error);
-      setMessage("An error occurred. Please try again.");
-    } finally {
-      setLoading(false);
+  const totalSteps = 2;
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleMultiSelect = (name, value) => {
+    setFormData(prev => ({
+      ...prev,
+      [name]: prev[name].includes(value)
+        ? prev[name].filter(item => item !== value)
+        : [...prev[name], value]
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Handle form submission
+    console.log('Form submitted:', formData);
+  };
+
+  const handlePhoneChange = (value) => {
+    setFormData(prev => ({
+      ...prev,
+      phone: value
+    }));
+  };
+
+  const handleNext = () => {
+    setCurrentStep(prev => prev + 1); // Move to the next step
+    window.scrollTo({ top: 0, behavior: "smooth" }); // Scroll to top smoothly
+  };
+
+  const interests = [
+    'Nature & Scenic Beauty',
+    'History & Culture',
+    'Beach & Relaxation',
+    'Adventure & Outdoor Activities',
+    'Wildlife Safaris',
+    'Wellness & Spa',
+    'Local Food & Cuisine',
+    'Festivals & Local Traditions',
+    'Hiking & Trekking',
+    'Water Sports'
+  ];
+
+  const accommodationTypes = [
+    'Villas',
+    'Standard Hotels',
+    '2-star Hotels',
+    '3-star Hotels',
+    '4-star Hotels',
+    '5-star Hotels',
+    'Home Stays'
+  ];
+
+  const budgetRanges = [
+    '$500 - $1000',
+    '$1000 - $2000',
+    '$2000 - $3000',
+    '$3000+'
+  ];
+
+  const additionalServices = [
+    'Private Chauffeur',
+    'Guided Tours',
+    'Airport Transfers',
+    'Spa/Wellness Packages',
+    'Special Occasion Arrangements'
+  ];
+
+  const faqs = [
+    {
+      question: 'How does the tour planning work?',
+      answer: 'Our expert travel consultants will review your preferences and create a personalized itinerary within 24-48 hours. You can then review and request any adjustments.'
+    },
+    {
+      question: 'How soon will I get my itinerary?',
+      answer: 'You will receive your custom itinerary within 24-48 hours of submitting your request.'
+    },
+    {
+      question: 'Can I customize my itinerary later?',
+      answer: 'Yes! Once you receive your initial itinerary, you can request any adjustments to better suit your preferences.'
+    }
+  ];
+
+  const renderStepContent = () => {
+    switch(currentStep) {
+      case 1:
+        return (
+          <div className="space-y-6">
+            <h3 className="text-xl font-semibold">Personal Information</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">First Name</label>
+                <input
+                  type="text"
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
+                <input
+                  type="text"
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+                <div className="flex gap-2">
+                <PhoneInput
+                        country={'lk'}
+                        value={formData.phone}
+                        onChange={handlePhoneChange}
+                        containerClass="w-full"
+                        inputClass="w-full pl-12 pr-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500 outline-none transition-shadow"
+                        buttonClass="!border-gray-200 !bg-white hover:!bg-gray-50"
+                      />
+                </div>
+              </div>
+            </div>
+            <h3 className="text-xl font-semibold">Travel Details</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Arrival Date</label>
+                <div className="relative">
+                  <input
+                    type="date"
+                    name="arrivalDate"
+                    value={formData.arrivalDate}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                    required
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Departure Date</label>
+                <div className="relative">
+                  <input
+                    type="date"
+                    name="departureDate"
+                    value={formData.departureDate}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                    required
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Number of Adults</label>
+                <div className="relative">
+                  <select
+                    name="adults"
+                    value={formData.adults}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                  >
+                    {[1,2,3,4,5,6,7,8,9,10].map(num => (
+                      <option key={num} value={num}>{num}</option>
+                    ))}
+                  </select>
+                  <Users className="absolute right-3 top-2.5 h-5 w-5 text-gray-400" />
+                </div>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Children & Ages</label>
+                <input
+                  type="text"
+                  name="children"
+                  value={formData.children}
+                  onChange={handleInputChange}
+                  placeholder="e.g., 2 (5 and 8 years old)"
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+            </div>
+            <h3 className="text-xl font-semibold">Travel Interests</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {interests.map((interest) => (
+                <label key={interest} className="flex items-center space-x-3 p-2 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={formData.interests.includes(interest)}
+                    onChange={() => handleMultiSelect('interests', interest)}
+                    className="h-5 w-5 text-blue-600 rounded focus:ring-blue-500"
+                  />
+                  <span className="text-gray-700">{interest}</span>
+                </label>
+              ))}
+            </div>
+            <h3 className="text-xl font-semibold">Accommodation Preferences</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {accommodationTypes.map((type) => (
+                <label key={type} className="flex items-center space-x-3 p-2 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={formData.accommodation.includes(type)}
+                    onChange={() => handleMultiSelect('accommodation', type)}
+                    className="h-5 w-5 text-blue-600 rounded focus:ring-blue-500"
+                  />
+                  <span className="text-gray-700">{type}</span>
+                </label>
+              ))}
+            </div>
+            <h3 className="text-xl font-semibold">Budget Per Person</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {budgetRanges.map((range) => (
+                <label key={range} className="flex items-center space-x-3 p-2 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="budget"
+                    value={range}
+                    checked={formData.budget === range}
+                    onChange={handleInputChange}
+                    className="h-5 w-5 text-blue-600 focus:ring-blue-500"
+                  />
+                  <span className="text-gray-700">{range}</span>
+                </label>
+              ))}
+            </div>
+            <h3 className="text-xl font-semibold">Additional Services</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {additionalServices.map((service) => (
+                <label key={service} className="flex items-center space-x-3 p-2 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={formData.additionalServices.includes(service)}
+                    onChange={() => handleMultiSelect('additionalServices', service)}
+                    className="h-5 w-5 text-blue-600 rounded focus:ring-blue-500"
+                  />
+                  <span className="text-gray-700">{service}</span>
+                </label>
+              ))}
+            </div>
+            <h3 className="text-xl font-semibold">Additional Information</h3>
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Specific locations or experiences you would like to include / Dietary restrictions or special needs
+                </label>
+                <textarea
+                  name="specificRequests"
+                  value={formData.specificRequests}
+                  onChange={handleInputChange}
+                  rows={4}
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+            </div>
+          </div>
+        );
+      case 2:
+        return (
+          <div className="space-y-6">
+            <h3 className="text-xl font-semibold">Review & Submit</h3>
+            <div className="bg-gray-50 p-6 rounded-lg space-y-4">
+              <h4 className="font-medium text-gray-900">Personal Information</h4>
+              <p className="text-gray-600">
+                {formData.firstName} {formData.lastName}<br />
+                {formData.email}<br />
+                {formData.countryCode} {formData.phone}
+              </p>
+              
+              <h4 className="font-medium text-gray-900 mt-6">Travel Details</h4>
+              <p className="text-gray-600">
+                Arrival: {formData.arrivalDate}<br />
+                Departure: {formData.departureDate}<br />
+                Group: {formData.adults} adults, {formData.children}
+              </p>
+
+              <h4 className="font-medium text-gray-900 mt-6">Selected Interests</h4>
+              <div className="flex flex-wrap gap-2">
+                {formData.interests.map(interest => (
+                  <span key={interest} className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">
+                    {interest}
+                  </span>
+                ))}
+              </div>
+
+              <h4 className="font-medium text-gray-900 mt-6">Budget Range</h4>
+              <p className="text-gray-600">{formData.budget}</p>
+            </div>
+          </div>
+        );
+      default:
+        return null;
     }
   };
 
-  const nextStep = () => setStep(step + 1);
-  const prevStep = () => setStep(step - 1);
-
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
-      <div className="max-w-4xl mx-auto px-4">
-        <div className="bg-white rounded-2xl shadow-lg p-6 md:p-8">
-          <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-gray-900">Book Your Tour</h1>
-            <p className="text-gray-600 mt-2">{}</p>
-            <div className="flex justify-center items-center gap-2 mt-4">
-              <span className="text-2xl font-bold text-blue-600">{}</span>
-              <span className="text-gray-500">per person</span>
-            </div>
+    <div className="min-h-screen bg-gray-50">
+      {/* Hero Section */}
+      <div className="relative h-[40vh] bg-blue-900">
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-900 to-blue-800"></div>
+        <div className="absolute inset-0 flex items-center justify-center text-center">
+          <div className="max-w-3xl px-4">
+            <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              Plan Your Dream Sri Lankan Adventure
+            </h1>
+            <p className="text-md text-blue-100">
+              Tell us your preferences, and our expert travel consultants will craft your perfect itinerary
+            </p>
           </div>
+        </div>
+      </div>
 
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
-            {step === 1 && (
-              <div>
-                <h2 className="text-xl font-semibold">Personal Information</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700">Full Name</label>
-                    <input {...register("fullName", { required: "Full name is required" })} type="text" className="mt-1 block w-full rounded-lg border-gray-300 bg-gray-50 p-3 focus:border-blue-500 focus:ring-blue-500" />
-                    {errors.fullName && <p className="text-red-500 text-xs mt-1">{errors.fullName.message}</p>}
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700">Email Address</label>
-                    <input {...register("email", { required: "Email is required" })} type="email" className="mt-1 block w-full rounded-lg border-gray-300 bg-gray-50 p-3 focus:border-blue-500 focus:ring-blue-500" />
-                    {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>}
-                  </div>
-                </div>
-              </div>
-            )}
+      {/* Form Section */}
+      <div className="max-w-4xl mx-auto -mt-20 relative z-10 bg-white rounded-xl shadow-xl p-8 mb-20">
+        
+        <form onSubmit={handleSubmit}>
+          {renderStepContent()}
 
-            {step < 3 ? (
-              <button type="button" onClick={nextStep} className="ml-auto px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">Next</button>
-            ) : (
-              <button type="submit" disabled={loading} className={`ml-auto px-8 py-3 bg-blue-600 text-white rounded-lg ${loading ? "opacity-50 cursor-not-allowed" : "hover:bg-blue-700"} transition-colors`}>
-                {loading ? "Submitting..." : "Complete Booking"}
+          <div className="mt-8 flex justify-between">
+            {currentStep > 1 && (
+              <button
+                type="button"
+                onClick={() => setCurrentStep(prev => prev - 1)}
+                className="flex items-center gap-2 px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50"
+              >
+                <ChevronLeft className="w-4 h-4" />
+                Previous
               </button>
             )}
-          </form>
+            {currentStep < totalSteps ? (
+              <button
+                type="button"
+                onClick={() => handleNext()}
+                className="ml-auto flex items-center gap-2 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+              >
+                Review
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            ) : (
+              <button
+                type="submit"
+                className="ml-auto flex items-center gap-2 px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+              >
+                Submit
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            )}
+          </div>
+        </form>
+      </div>
 
-          {message && (
-            <div className={`mt-6 p-4 rounded-lg ${message.includes("successfully") ? "bg-green-50 text-green-800" : "bg-red-50 text-red-800"}`}>{message}</div>
-          )}
+      {/* FAQ Section */}
+      <div className="max-w-4xl mx-auto px-4 pb-20">
+        <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Frequently Asked Questions</h2>
+        <div className="space-y-6">
+          {faqs.map((faq, index) => (
+            <div key={index} className="bg-white rounded-lg shadow-md p-6">
+              <h3 className="flex items-center gap-2 text-lg font-semibold text-gray-900 mb-2">
+                <HelpCircle className="w-5 h-5 text-blue-600" />
+                {faq.question}
+              </h3>
+              <p className="text-gray-600">{faq.answer}</p>
+            </div>
+          ))}
         </div>
       </div>
     </div>
   );
 };
 
-export default PlanForm;
+export default PlanTour;
