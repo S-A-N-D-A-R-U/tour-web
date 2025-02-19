@@ -38,6 +38,7 @@ const TourBooking = () => {
   };
 
   const handlePhoneChange = (value) => {
+    console.log("New Phone Value:", value);
     setFormData(prev => ({
       ...prev,
       phone: value
@@ -76,28 +77,14 @@ const TourBooking = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section with Tour Image */}
-      <div className="relative h-[300px]">
+      <div className="relative h-[90px]">
         <img 
           src={tour.image} 
           alt={tour.title}
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-black/50"></div>
-        <div className="absolute inset-0 flex items-center">
-          <div className="max-w-7xl mx-auto px-4 text-white">
-            <h1 className="text-4xl font-bold mb-4 font-display">{tour.title}</h1>
-            {/* Breadcrumb */}
-            <div className="flex items-center space-x-2 text-sm text-white/80">
-              <Link to="/" className="hover:text-white">Home</Link>
-              <ChevronRight className="w-4 h-4" />
-              <Link to="/tours" className="hover:text-white">Tours</Link>
-              <ChevronRight className="w-4 h-4" />
-              <Link to={`/tours/${id}`} className="hover:text-white">Tour Details</Link>
-              <ChevronRight className="w-4 h-4" />
-              <span className="text-white font-medium">Book Tour</span>
-            </div>
-          </div>
-        </div>
+        <div className="absolute inset-0"></div>
+
       </div>
 
       <div className="max-w-7xl mx-auto px-4 py-12">
@@ -172,8 +159,14 @@ const TourBooking = () => {
                         country={'lk'}
                         value={formData.phone}
                         onChange={handlePhoneChange}
+                        enableSearch={true}
+                        inputProps={{
+                          name: 'phone',
+                          required: true,
+                          autoFocus: false
+                        }}
                         containerClass="w-full"
-                        inputClass="w-full pl-12 pr-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500 outline-none transition-shadow"
+                        inputClass="w-full pl-12 pr-4 py-6 rounded-lg border border-gray-200 bg-gray-50  focus:ring-2 focus:ring-blue-500 outline-none transition-shadow"
                         buttonClass="!border-gray-200 !bg-white hover:!bg-gray-50"
                       />
                     </div>

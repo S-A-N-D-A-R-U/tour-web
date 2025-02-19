@@ -3,7 +3,7 @@ import TourPackageItemCard from "./TourPackageItemCard";
 
 const PACKAGES = [
   {
-    id: "1",
+    id: "67b5c87fbe1163b5af14a701",
     title: "Sri Lanka & Maldives Tour",
     price: "240",
     rating: 4.8,
